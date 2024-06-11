@@ -1,9 +1,6 @@
 using Lean.Pool;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
 
 public class Ground : MonoBehaviour
 {
@@ -24,8 +21,5 @@ public class Ground : MonoBehaviour
             bar_fill.fillAmount += _score;
 
         }
-        
-
-
     }
 }

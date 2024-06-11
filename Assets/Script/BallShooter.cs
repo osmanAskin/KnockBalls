@@ -9,6 +9,7 @@ public class BallShooter : MonoBehaviour
     [SerializeField] Ball prefab;
     [SerializeField] private float speed;
     [SerializeField] int bullet = 3;
+    [SerializeField] private LayerMask clickLayerMask;
     public TextMeshProUGUI BulletText;
 
     private Rigidbody _currentBallRb;
@@ -26,12 +27,10 @@ public class BallShooter : MonoBehaviour
         PointerEventData pointerEventData = eventData as PointerEventData;
         Ray ray = Camera.main.ScreenPointToRay(pointerEventData.position);
         RaycastHit hit;
-        if (Physics.SphereCast(ray, 0.15f, out hit, 100f, 1, QueryTriggerInteraction.Ignore)) 
+        if (Physics.SphereCast(ray, 0.15f, out hit, 100f, clickLayerMask, QueryTriggerInteraction.Ignore)) 
         {
             ShootTarget(hit.point);
 
-
-            //bullet
             bullet--;
             BulletText.text = bullet.ToString();
             Debug.Log(bullet);
@@ -40,7 +39,6 @@ public class BallShooter : MonoBehaviour
             {
                 BulletText.text = ("Failed!");
                 Debug.Log("Failed!");
-                //top hakký bitince topu spawnlanmasini nasil engelleyeceðim
             }
         }
     }
@@ -85,8 +83,7 @@ public class BallShooter : MonoBehaviour
 
     public void SpawnNewBall()
     {
-
-        // bunu getcomponent ile yapma, ball scriptinin icinde rigidbody olsun ordan ulas//tamam kardesim
-        _currentBallRb = LeanPool.Spawn<Ball>(prefab,transform.position,Quaternion.identity).rb;
+        _currentBallRb = LeanPool.Spawn(prefab,transform.position,Quaternion.identity).rb;
+        _currentBallRb.isKinematic = true;
     }
 }
