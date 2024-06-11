@@ -11,6 +11,7 @@ public class Platform : MonoBehaviour
         InvokeRepeating(nameof(CheckGameEnd), 0, 2f);
     }
 
+    // ai'a kesin sor
     public void CheckGameEnd()
     {
         var colliderPosition = transform.position + collider.center; 
