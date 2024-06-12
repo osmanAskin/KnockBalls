@@ -11,6 +11,8 @@ public class BallShooter : MonoBehaviour
     [SerializeField] int bullet = 3;
     [SerializeField] private LayerMask clickLayerMask;
     public TextMeshProUGUI BulletText;
+    
+    public GameObject gameOverMenu;
 
     private Rigidbody _currentBallRb;
 
@@ -19,6 +21,7 @@ public class BallShooter : MonoBehaviour
         SpawnNewBall();
     }
 
+    
     public void OnPointerUp(BaseEventData eventData)
     {
         // 1 saniye icinde yeni ball yaratana kadar tekrar ates etmene izin vermiyorum
@@ -35,13 +38,16 @@ public class BallShooter : MonoBehaviour
             BulletText.text = bullet.ToString();
             Debug.Log(bullet);
 
-            if(bullet <= 0) 
+            if (bullet <= 0)
             {
                 BulletText.text = ("Failed!");
                 Debug.Log("Failed!");
+                gameOverMenu.SetActive(true);
             }
         }
     }
+    
+
     
     public void ShootTarget(Vector3 raycastHitPosition)
     {

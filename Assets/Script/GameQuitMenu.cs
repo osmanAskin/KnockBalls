@@ -6,10 +6,27 @@ using UnityEngine.UI;
 
 public class GameQuitMenu : MonoBehaviour
 {
-    public Button YesQuitButton;
+    public Button restartButton;
+    public bool isPaused = false;
 
-    public void QuitButton() 
+
+    public void FreezeScene() 
     {
-        SceneManager.LoadScene(0);
+        if (isPaused) 
+        {
+            Time.timeScale = 1.0f;
+            isPaused = false;
+        }
+
+        else if(!isPaused) 
+        {
+            Time.timeScale = 0.0f;
+            isPaused = true;
+
+        }
+    }
+    public void Restart() 
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

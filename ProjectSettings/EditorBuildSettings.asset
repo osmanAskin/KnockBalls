@@ -6,12 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Silinecek-StartScene.unity
-    guid: 2688f6f86db70ae43bfd7d271be58875
-  - enabled: 1
     path: Assets/Scenes/Level-1.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   - enabled: 1
-    path: Assets/Scenes/Silinecek-nextScene.unity
-    guid: fd7ece08f5325174ebc28c101ba8e487
+    path: Assets/Scenes/Level-2.unity
+    guid: 7114d65be9bcbeb4095bf54c6809f25f
+  - enabled: 1
+    path: Assets/Scenes/Level-3.unity
+    guid: 276efb9d93e09d840a65c9557d0ea999
   m_configObjects: {}
