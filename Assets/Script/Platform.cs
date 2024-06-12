@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+//TODO: bu classin bazi kisimlarini silip kendin yaz 
 public class Platform : MonoBehaviour
 {
     [SerializeField] private BoxCollider collider;

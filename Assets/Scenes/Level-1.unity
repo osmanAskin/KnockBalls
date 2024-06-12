@@ -38,7 +38,6 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -156,6 +155,7 @@ Transform:
   m_Children:
   - {fileID: 1265264789}
   - {fileID: 377300975}
+  - {fileID: 1529178308}
   m_Father: {fileID: 147105292}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &52996471
@@ -635,9 +635,7 @@ Transform:
   - {fileID: 1009304215}
   - {fileID: 1978357896}
   - {fileID: 1638378379}
-  - {fileID: 699731933}
   - {fileID: 2132883857}
-  - {fileID: 1529178308}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &206033990
@@ -1501,7 +1499,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.4010805, g: 1, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1794,63 +1792,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 613171540}
   m_CullTransparentMesh: 1
---- !u!1 &699731931
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 699731933}
-  - component: {fileID: 699731932}
-  m_Layer: 0
-  m_Name: BallPool
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &699731932
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 699731931}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eea08375da243a441b88d1e6b0713006, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  prefab: {fileID: 2504068162407766493, guid: 3ce53749ef367412db12a50bb5157cfc, type: 3}
-  notification: 3
-  strategy: 0
-  preload: 5
-  capacity: 0
-  recycle: 0
-  persist: 0
-  stamp: 0
-  warnings: 1
-  spawnedClonesList: []
-  despawnedClones: []
-  delays: []
-  deactivatedChild: {fileID: 0}
---- !u!4 &699731933
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 699731931}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 147105292}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -2976,6 +2917,7 @@ GameObject:
   - component: {fileID: 1001770676}
   - component: {fileID: 1001770675}
   - component: {fileID: 1001770674}
+  - component: {fileID: 1001770678}
   m_Layer: 3
   m_Name: Cube
   m_TagString: box
@@ -3096,6 +3038,20 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1001770672}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1001770678
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1001770672}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96faa4370d34cdf4fa6026033c53fc69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rb: {fileID: 1001770674}
+  force: 100
 --- !u!1 &1009304214
 GameObject:
   m_ObjectHideFlags: 0
@@ -4587,9 +4543,9 @@ GameObject:
   - component: {fileID: 1529178311}
   - component: {fileID: 1529178310}
   - component: {fileID: 1529178309}
-  m_Layer: 3
+  m_Layer: 6
   m_Name: BallClick
-  m_TagString: box
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4602,12 +4558,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1529178307}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.2, y: 2.3, z: 55.7}
-  m_LocalScale: {x: 50, y: 60, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 5, z: 0}
+  m_LocalScale: {x: 30, y: 40, z: 0.1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 147105292}
+  m_Father: {fileID: 52996470}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &1529178309
 BoxCollider:
@@ -4690,6 +4646,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1638378379}
   - component: {fileID: 1638378380}
+  - component: {fileID: 1638378381}
   m_Layer: 0
   m_Name: BallShooter
   m_TagString: Untagged
@@ -4729,9 +4686,34 @@ MonoBehaviour:
   bullet: 3
   clickLayerMask:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 72
   BulletText: {fileID: 758580442}
   gameOverMenu: {fileID: 358641093}
+--- !u!114 &1638378381
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1638378378}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eea08375da243a441b88d1e6b0713006, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 2504068162407766493, guid: 3ce53749ef367412db12a50bb5157cfc, type: 3}
+  notification: 3
+  strategy: 0
+  preload: 5
+  capacity: 0
+  recycle: 0
+  persist: 0
+  stamp: 0
+  warnings: 1
+  spawnedClonesList: []
+  despawnedClones: []
+  delays: []
+  deactivatedChild: {fileID: 0}
 --- !u!1 &1668691930
 GameObject:
   m_ObjectHideFlags: 0
@@ -5356,7 +5338,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 1a1fb5b747fbfb4499444b3e8683c064, type: 2}
+  - {fileID: 2100000, guid: a447db042a5c44c7d8385cec6bf41a2b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5526,7 +5508,7 @@ GameObject:
   - component: {fileID: 2034369016}
   - component: {fileID: 2034369018}
   m_Layer: 5
-  m_Name: Ray
+  m_Name: EventTriggerImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6214,7 +6196,7 @@ GameObject:
   - component: {fileID: 2132883854}
   - component: {fileID: 2132883858}
   m_Layer: 0
-  m_Name: BallDisappearCollider
+  m_Name: Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6318,9 +6300,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2e1f8b471dd16545a395dae02b674d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HighScore: {fileID: 835471803}
-  score: {fileID: 495912799}
-  bar_fill: {fileID: 495914099}
+  highScoreText: {fileID: 835471803}
+  scoreText: {fileID: 835471803}
+  barFillImage: {fileID: 495914099}
 --- !u!114 &93291774604949615
 MonoBehaviour:
   m_ObjectHideFlags: 0

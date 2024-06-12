@@ -1,10 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.Overlays;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
+// TODO: ui ile ilgili genel seyler burda olmali
 public class UIManager : MonoBehaviour
 {
     //first scene settings 

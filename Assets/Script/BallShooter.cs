@@ -2,8 +2,8 @@ using Lean.Pool;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.UI;
 
+//TODO: ui kisimlarini burdan kaldir, GameManager'dan oyun bitti fonksiyonunu cagir ve oranin icinde oyunu bitir ui degisiklerini de 
 public class BallShooter : MonoBehaviour
 {
     [SerializeField] Ball prefab;

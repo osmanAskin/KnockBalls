@@ -3,27 +3,28 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+// TODO: herhangi ui ile alakali birsey bu classta olmiycak
+// TODO: highscore'u da score'u arttirdigin yerde kontrol et
 public class Ground : MonoBehaviour
 {
-    //score
-    private int _score;
-    public TextMeshProUGUI HighScore;
-    public TextMeshProUGUI score;
+    [SerializeField] private TextMeshProUGUI highScoreText;
+    [SerializeField] private TextMeshProUGUI scoreText;
+    [SerializeField] private Image barFillImage;
 
-    public Image bar_fill;
+    private int _score;
 
     private void Start()
     {
-        HighScore.text = PlayerPrefs.GetInt("HightScore", _score).ToString();
-        highScore();
+        highScoreText.text = PlayerPrefs.GetInt("HightScore", _score).ToString();
+        HighScore();
     }
 
-    public void highScore() 
+    public void HighScore() 
     {
         if (_score > PlayerPrefs.GetInt("HighScore", 0)) 
         {
             PlayerPrefs.SetInt("HighScore", _score);
-            HighScore.text = _score.ToString();
+            highScoreText.text = _score.ToString();
         }
 
     }
@@ -35,20 +36,11 @@ public class Ground : MonoBehaviour
             LeanPool.Despawn(other.gameObject);
         }
 
-        //pointer
         if (other.gameObject.CompareTag("box"))
         {
             Debug.Log(++_score);
-            score.text = _score.ToString();
-
-            //bu sistem deðiþecek rastgele float deðer eklenmeyecek her seviyden sonra 1 kutu dolacak
-            //_score += 1f;
-            bar_fill.fillAmount += _score;
-            
-
+            scoreText.text = _score.ToString();
+            barFillImage.fillAmount += _score;
         }
-
-
-        
     }
 }
