@@ -9,6 +9,8 @@ TagManager:
   - ball
   - GlassCube
   - Pointer
+  - Ground
+  - Score
   layers:
   - Default
   - TransparentFX

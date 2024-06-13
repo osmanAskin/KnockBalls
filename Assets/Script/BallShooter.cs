@@ -1,3 +1,4 @@
+using DG.Tweening;
 using Lean.Pool;
 using TMPro;
 using UnityEngine;
@@ -8,11 +9,7 @@ public class BallShooter : MonoBehaviour
 {
     [SerializeField] Ball prefab;
     [SerializeField] private float speed;
-    [SerializeField] int bullet = 3;
     [SerializeField] private LayerMask clickLayerMask;
-    public TextMeshProUGUI BulletText;
-    
-    public GameObject gameOverMenu;
 
     private Rigidbody _currentBallRb;
 
@@ -33,17 +30,6 @@ public class BallShooter : MonoBehaviour
         if (Physics.SphereCast(ray, 0.15f, out hit, 100f, clickLayerMask, QueryTriggerInteraction.Ignore)) 
         {
             ShootTarget(hit.point);
-
-            bullet--;
-            BulletText.text = bullet.ToString();
-            Debug.Log(bullet);
-
-            if (bullet <= 0)
-            {
-                BulletText.text = ("Failed!");
-                Debug.Log("Failed!");
-                gameOverMenu.SetActive(true);
-            }
         }
     }
     
@@ -90,6 +76,11 @@ public class BallShooter : MonoBehaviour
     public void SpawnNewBall()
     {
         _currentBallRb = LeanPool.Spawn(prefab,transform.position,Quaternion.identity).rb;
+
+        //olmadi 
+        Sequence spawnSequence = DOTween.Sequence();//sekans olusturdum
+        spawnSequence.AppendInterval(3f);//gecikme ekledim ,3f
+        Destroy(prefab);
         _currentBallRb.isKinematic = true;
     }
 }
