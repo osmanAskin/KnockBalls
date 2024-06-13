@@ -1,11 +1,9 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class RestartMenu : MonoBehaviour
 {
-    public Button restartButton;
-    public bool isPaused = false;
+    private bool isPaused;
 
     public void FreezeScene() 
     {

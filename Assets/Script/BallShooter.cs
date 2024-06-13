@@ -1,6 +1,5 @@
-using DG.Tweening;
+using System;
 using Lean.Pool;
-using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -10,25 +9,30 @@ public class BallShooter : MonoBehaviour
     [SerializeField] Ball prefab;
     [SerializeField] private float speed;
     [SerializeField] private LayerMask clickLayerMask;
-
-    private Rigidbody _currentBallRb;
+    
+    public int bulletCount;
+    private Rigidbody currentBallRb;
+    public Action<int> OnBulletCountChange;
 
     private void Start()
     {
+        OnBulletCountChange?.Invoke(bulletCount);
         SpawnNewBall();
     }
-
     
     public void OnPointerUp(BaseEventData eventData)
     {
-        // 1 saniye icinde yeni ball yaratana kadar tekrar ates etmene izin vermiyorum
-        if (_currentBallRb == null) return;
+        //TODO: MERMI YOKSA OYUN BITTI FAIL ET ADAMI, BU FAILIDA ACTION ILE YAP OnBulletFinish yap ve buna fail menuden subscribe ol
+        if(bulletCount <= 0) return;
+        if (currentBallRb == null) return;
         
         PointerEventData pointerEventData = eventData as PointerEventData;
         Ray ray = Camera.main.ScreenPointToRay(pointerEventData.position);
         RaycastHit hit;
-        if (Physics.SphereCast(ray, 0.15f, out hit, 100f, clickLayerMask, QueryTriggerInteraction.Ignore)) 
+        if (Physics.SphereCast(ray, 0.15f, out hit, 100f, clickLayerMask, QueryTriggerInteraction.Ignore))
         {
+            bulletCount--;
+            OnBulletCountChange?.Invoke(bulletCount);
             ShootTarget(hit.point);
         }
     }
@@ -41,8 +45,8 @@ public class BallShooter : MonoBehaviour
         float angle = 0;
         LaunchAngle(speed, fromTo2D.magnitude, raycastHitPosition.y - transform.position.y, Physics.gravity.magnitude, out angle);
         angle *= Mathf.Rad2Deg;
-        SetVelocity(_currentBallRb, Quaternion.AngleAxis(angle, -transform.right) * fromTo2D.normalized * speed);
-        _currentBallRb = null;
+        SetVelocity(currentBallRb, Quaternion.AngleAxis(angle, -transform.right) * fromTo2D.normalized * speed);
+        currentBallRb = null;
         Invoke(nameof(SpawnNewBall), 1f);
     }
 
@@ -75,12 +79,7 @@ public class BallShooter : MonoBehaviour
 
     public void SpawnNewBall()
     {
-        _currentBallRb = LeanPool.Spawn(prefab,transform.position,Quaternion.identity).rb;
-
-        //olmadi 
-        Sequence spawnSequence = DOTween.Sequence();//sekans olusturdum
-        spawnSequence.AppendInterval(3f);//gecikme ekledim ,3f
-        Destroy(prefab);
-        _currentBallRb.isKinematic = true;
+        currentBallRb = LeanPool.Spawn(prefab,transform.position,Quaternion.identity).rb;
+        currentBallRb.isKinematic = true;
     }
 }

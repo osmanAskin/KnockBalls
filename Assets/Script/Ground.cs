@@ -1,8 +1,6 @@
 using Lean.Pool;
 using UnityEngine;
 
-// TODO: herhangi ui ile alakali birsey bu classta olmiycak
-// TODO: highscore'u da score'u arttirdigin yerde kontrol et
 public class Ground : MonoBehaviour
 {
     //[SerializeField] private TextMeshProUGUI highScoreText;
