@@ -6,50 +6,50 @@ using UnityEngine.EventSystems;
 //TODO: ui kisimlarini burdan kaldir, GameManager'dan oyun bitti fonksiyonunu cagir ve oranin icinde oyunu bitir ui degisiklerini de 
 public class BallShooter : MonoBehaviour
 {
-    [SerializeField] Ball prefab;//eriþim belirleyicisi default deðer olarak private alir
+    [SerializeField] Ball prefab;//eriï¿½im belirleyicisi default deï¿½er olarak private alir
     [SerializeField] private float speed;
-    [SerializeField] private LayerMask clickLayerMask;//týklanabilir laylerlar
+    [SerializeField] private LayerMask clickLayerMask;//tï¿½klanabilir laylerlar
     
     public int bulletCount;
     private Rigidbody currentBallRb;
-    public Action<int> OnBulletCountChange;//mermi sayýsýndaki deðiþiklikleri bildiren event
-
-    //lose
-    UIManager UImanager;
+    public Action<int> OnBulletCountChange;//mermi sayï¿½sï¿½ndaki deï¿½iï¿½iklikleri bildiren event
+    public Action OnBulletFinish;
 
     private void Start()
     {
-        UImanager = FindObjectOfType<UIManager>();
-
         OnBulletCountChange?.Invoke(bulletCount);
         SpawnNewBall();//olan topu tekrar spawnliyo
     }
     
-    public void OnPointerUp(BaseEventData eventData)//ekrana týklandýðýnda tetiklenir
+    public void OnPointerUp(BaseEventData eventData)//ekrana tï¿½klandï¿½ï¿½ï¿½nda tetiklenir
     {
         //TODO: MERMI YOKSA OYUN BITTI FAIL ET ADAMI, BU FAILIDA ACTION ILE YAP OnBulletFinish yap ve buna fail menuden subscribe ol
         if (bulletCount <= 0) 
         {
-            UImanager.LoseTextWrite();
-            return;//mermi sayisi sýfýrdan kücük veya az ise bos return döndürür
+            return;//mermi sayisi sï¿½fï¿½rdan kï¿½cï¿½k veya az ise bos return dï¿½ndï¿½rï¿½r
         } 
 
-        if (currentBallRb == null) return; //atýlmaya hazir top yoksa da bos return döndürür yani foknsiyondan cýkar
+        if (currentBallRb == null) return; //atï¿½lmaya hazir top yoksa da bos return dï¿½ndï¿½rï¿½r yani foknsiyondan cï¿½kar
         
         PointerEventData pointerEventData = eventData as PointerEventData;
         Ray ray = Camera.main.ScreenPointToRay(pointerEventData.position);
         RaycastHit hit;
-        if (Physics.SphereCast(ray, 0.15f, out hit, 100f, clickLayerMask, QueryTriggerInteraction.Ignore))//kýsaca ýþýn gönderiyor ve çarpan yerin konumunu aliyor
+        if (Physics.SphereCast(ray, 0.15f, out hit, 100f, clickLayerMask, QueryTriggerInteraction.Ignore))//kï¿½saca ï¿½ï¿½ï¿½n gï¿½nderiyor ve ï¿½arpan yerin konumunu aliyor
         {
-            bulletCount--;
-            OnBulletCountChange?.Invoke(bulletCount);
             ShootTarget(hit.point);
+            
+            bulletCount--;
+            OnBulletCountChange?.Invoke(bulletCount);   
+            if (bulletCount == 0)
+            {
+                OnBulletFinish?.Invoke();
+            }
         }
     }
     
 
     
-    public void ShootTarget(Vector3 raycastHitPosition)//matematiksel iþlmler
+    public void ShootTarget(Vector3 raycastHitPosition)//matematiksel iï¿½lmler
     {
         Vector3 fromTo2D = new Vector3(raycastHitPosition.x - transform.position.x, 0, raycastHitPosition.z - transform.position.z);
         float angle = 0;
@@ -81,13 +81,13 @@ public class BallShooter : MonoBehaviour
         return true;
     }
     
-    public void SetVelocity(Rigidbody rb, Vector3 velocity)//topun rb bileþenine yeni bir hýz deðeri atiyor
+    public void SetVelocity(Rigidbody rb, Vector3 velocity)//topun rb bileï¿½enine yeni bir hï¿½z deï¿½eri atiyor
     {
         rb.isKinematic = false;
         rb.AddForce(velocity, ForceMode.VelocityChange);
     }
 
-    public void SpawnNewBall()//leanpool sistemi kullanarak yeni bir top oluþturur ve onu atilmaya hazir hale getirir
+    public void SpawnNewBall()//leanpool sistemi kullanarak yeni bir top oluï¿½turur ve onu atilmaya hazir hale getirir
     {
         currentBallRb = LeanPool.Spawn(prefab,transform.position,Quaternion.identity).rb;
         currentBallRb.isKinematic = true;

@@ -8,21 +8,17 @@ using UnityEngine.SceneManagement;
 public class Platform : MonoBehaviour
 {
     [SerializeField] private BoxCollider collider;//platformun coll
-    [SerializeField] private LayerMask layerMask; //platformun sayacaði nesnelerin katmanlarini belirler(sadece box)
+    [SerializeField] private LayerMask layerMask; //platformun sayacaï¿½i nesnelerin katmanlarini belirler(sadece box)
 
-    private int totalBoxCount;//platformun üzerindeki baþlangýçtaki kutu sayisi
-    private int currentBoxCount;//platformun üzerinde olan þuan ki kutu sayisi 
-    public Action<int> OnBoxCountChange;//kalan kutu sayisi deðiþtiðinde tetiklenen event
-
-    //winText
-    UIManager UImanager;
+    private int totalBoxCount;//platformun ï¿½zerindeki baï¿½langï¿½ï¿½taki kutu sayisi
+    private int currentBoxCount;//platformun ï¿½zerinde olan ï¿½uan ki kutu sayisi 
+    public Action<int> OnHittedBoxCountChange;//kalan kutu sayisi deï¿½iï¿½tiï¿½inde tetiklenen event
+    public Action OnBoxCountFinish;
 
     private void Start()
     {
-        UImanager = FindObjectOfType<UIManager>();
-
-        totalBoxCount = CalculateBoxCountOnPlatform(); //platformdaki hesaplanmýþ kutu sayisini baþlangýçtaki deðere atar ki baþlangýçta kaç kutu oldugu bilinebilsin
-        InvokeRepeating(nameof(CheckGameEnd), 0, 2f);//method 2 saniyede bir tekrar tekrar çalýþýr
+        totalBoxCount = CalculateBoxCountOnPlatform(); //platformdaki hesaplanmï¿½ï¿½ kutu sayisini baï¿½langï¿½ï¿½taki deï¿½ere atar ki baï¿½langï¿½ï¿½ta kaï¿½ kutu oldugu bilinebilsin
+        InvokeRepeating(nameof(CheckGameEnd), 0, 2f);//method 2 saniyede bir tekrar tekrar ï¿½alï¿½ï¿½ï¿½r
     }
     
     
@@ -31,22 +27,25 @@ public class Platform : MonoBehaviour
     {
         var numberOfBoxOnPlatform = CalculateBoxCountOnPlatform();
 
-        if (currentBoxCount != numberOfBoxOnPlatform)//hesaplanan sayi önceki kutu sayisi ile farkliysa þuanki kutu sayisini günceller
+        if (currentBoxCount != numberOfBoxOnPlatform)//hesaplanan sayi ï¿½nceki kutu sayisi ile farkliysa ï¿½uanki kutu sayisini gï¿½nceller
         {
             currentBoxCount = numberOfBoxOnPlatform;
-            OnBoxCountChange?.Invoke(totalBoxCount - numberOfBoxOnPlatform);
+            OnHittedBoxCountChange?.Invoke(totalBoxCount - numberOfBoxOnPlatform);
         }
         
-        if (numberOfBoxOnPlatform == 0)//platformun üzerinde hiç kutu kalmadiysa bu koþullu döngüye girer
+        if (numberOfBoxOnPlatform == 0)//platformun ï¿½zerinde hiï¿½ kutu kalmadiysa bu koï¿½ullu dï¿½ngï¿½ye girer
         {
-            UImanager.WinTextWrite();
-
-            Debug.Log("NextLevel");
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            OnBoxCountFinish?.Invoke();
+            Invoke(nameof(NextLevelTransition), 2f);
         }
     }
 
-    private int CalculateBoxCountOnPlatform()//platformun çarpýþma alaný boyutlarýný ve konumunu hesaplayarak kutu sayýsý belirlenir
+    private static void NextLevelTransition()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+
+    private int CalculateBoxCountOnPlatform()//platformun ï¿½arpï¿½ï¿½ma alanï¿½ boyutlarï¿½nï¿½ ve konumunu hesaplayarak kutu sayï¿½sï¿½ belirlenir
     {
         var colliderPosition = transform.position + collider.center;
         var numberOfBoxOnPlatform = Physics.OverlapBox(colliderPosition,  collider.size, Quaternion.identity, layerMask).Length;

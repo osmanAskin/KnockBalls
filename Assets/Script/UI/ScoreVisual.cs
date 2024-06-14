@@ -5,13 +5,13 @@ public class ScoreVisual : MonoBehaviour
 {
     public TextMeshProUGUI scoreText;
 
-    private Platform _platform;//anlamadim (baþka classdan gelen referansi depolamak için)
+    private Platform _platform;//anlamadim (baï¿½ka classdan gelen referansi depolamak iï¿½in)
     public int _score;
 
     private void Start()
     {
         _platform = FindObjectOfType<Platform>();
-        _platform.OnBoxCountChange += UpdateScore;//kutular yok oldugunda OnBoxCountChangei tetikler
+        _platform.OnHittedBoxCountChange += UpdateScore;//kutular yok oldugunda OnBoxCountChangei tetikler
     }
 
     private void UpdateScore(int boxCount)

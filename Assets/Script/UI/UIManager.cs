@@ -1,9 +1,7 @@
+using System;
 using UnityEngine;
-using DG.Tweening;
-using TMPro;
-using Unity.VisualScripting;
 
-public class UIManager : ScoreVisual
+public class UIManager : MonoBehaviour
 {
     //first scene settings 
     [SerializeField] private Animator LayoutAnimator;
@@ -12,14 +10,21 @@ public class UIManager : ScoreVisual
     [SerializeField] private GameObject progressBarObject;
     [SerializeField] private GameObject bulletObject;
     [SerializeField] private GameObject restartMenuObject;
-
     [SerializeField] private GameObject mainMenuObject;
-
-    //Win
     [SerializeField] private GameObject winObject;
-
-    //Lose
     [SerializeField] private GameObject loseObject;
+    private BallShooter ballShooter;
+    private Platform platform;
+
+    private void Start()
+    {
+        ballShooter = FindObjectOfType<BallShooter>();
+        ballShooter.OnBulletFinish += ActivateFail;
+        
+        platform = FindObjectOfType<Platform>();
+        platform.OnBoxCountFinish += ActivateWin;
+    }
+
     public void LayoutSettingsOpen()
     {
         LayoutAnimator.SetTrigger("slide_in");
@@ -39,12 +44,12 @@ public class UIManager : ScoreVisual
         restartMenuObject.SetActive(true);
     }
 
-    public void WinTextWrite() 
+    private void ActivateWin() 
     {
-       winObject.SetActive(true);
+        winObject.SetActive(true);
     }
 
-    public void LoseTextWrite() 
+    private void ActivateFail() 
     {
         loseObject.SetActive(true);
     }
