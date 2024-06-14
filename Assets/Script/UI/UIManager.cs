@@ -1,4 +1,7 @@
 using UnityEngine;
+using DG.Tweening;
+using TMPro;
+using Unity.VisualScripting;
 
 public class UIManager : ScoreVisual
 {
@@ -11,7 +14,12 @@ public class UIManager : ScoreVisual
     [SerializeField] private GameObject restartMenuObject;
 
     [SerializeField] private GameObject mainMenuObject;
-    
+
+    //Win
+    [SerializeField] private GameObject winObject;
+
+    //Lose
+    [SerializeField] private GameObject loseObject;
     public void LayoutSettingsOpen()
     {
         LayoutAnimator.SetTrigger("slide_in");
@@ -29,6 +37,16 @@ public class UIManager : ScoreVisual
         progressBarObject.SetActive(true);
         bulletObject.SetActive(true);
         restartMenuObject.SetActive(true);
+    }
+
+    public void WinTextWrite() 
+    {
+       winObject.SetActive(true);
+    }
+
+    public void LoseTextWrite() 
+    {
+        loseObject.SetActive(true);
     }
 }
 

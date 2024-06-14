@@ -13,7 +13,7 @@ public class Box : MonoBehaviour
             Vector3 direction = contactPoint - transform.position; // Direction from box to contact point
 
             // Apply force in the direction of impact
-            rb.AddForce(direction.normalized * force, ForceMode.Impulse);
+            rb.AddForce(direction.normalized * force, ForceMode.Impulse);//boxlara addForce ekleniyor
         }
     }
 }

@@ -1,9 +1,9 @@
 using TMPro;
 using UnityEngine;
 
-public class BulletVisual : MonoBehaviour
+public class BulletVisual : MonoBehaviour//mantýðý scoreVisual ile ayni
 {
-    [SerializeField] protected TextMeshProUGUI bulletText;
+    [SerializeField] private TextMeshProUGUI bulletText;
 
     private BallShooter ballShooter;
 
