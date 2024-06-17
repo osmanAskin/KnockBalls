@@ -3,14 +3,12 @@ using UnityEngine;
 
 public class ScoreVisual : MonoBehaviour
 {
-    public TextMeshProUGUI scoreText;
-    public TextMeshProUGUI highScoreText;
-
+    [SerializeField] private TextMeshProUGUI scoreText;
+    [SerializeField] private TextMeshProUGUI highScoreText;
 
     private Platform _platform;//platform classindan actiona erismek icin referans 
-    public int _score;
-    public int _highScore;
-
+    private int _score;
+    private int _highScore;
 
     private void Start()
     {
@@ -20,6 +18,7 @@ public class ScoreVisual : MonoBehaviour
         if (PlayerPrefs.HasKey("highscore")) 
         {
             _highScore = PlayerPrefs.GetInt("highscore");
+            highScoreText.text = "High Score : "+ _highScore;
         }
     }
 
@@ -33,9 +32,6 @@ public class ScoreVisual : MonoBehaviour
             _highScore = _score;
             PlayerPrefs.SetInt("highscore", _highScore);
         }
-        highScoreText.text = _highScore.ToString();
-
-
     }
 
     //private void OnEnable()

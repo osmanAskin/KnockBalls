@@ -40,9 +40,9 @@ public class Platform : MonoBehaviour
         }
     }
 
-    private static void NextLevelTransition()
+    private void NextLevelTransition()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     private int CalculateBoxCountOnPlatform()//objeler platformda mi hesaplayan mekanizma 

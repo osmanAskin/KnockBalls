@@ -1,10 +1,9 @@
 using UnityEngine;
-using UnityEngine.Audio;
 
-[System.Serializable]//Inspector penceresinde gorunebilmesi icin
-public class Sound : MonoBehaviour
+[System.Serializable]
+public class Sound
 {
-    public string name;
+    public SoundType type;
 
     public AudioClip clip;
     

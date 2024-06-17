@@ -1,29 +1,34 @@
 using System;
-using UnityEngine.Audio;
 using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
-
     public Sound[] sounds;
-
 
     private void Awake()
     {
-        foreach (Sound s in sounds) 
+        foreach (var sound in sounds) 
         {
-            s.source = gameObject.AddComponent<AudioSource>();
-            s.source.clip = s.clip;
+            sound.source = gameObject.AddComponent<AudioSource>();
+            sound.source.clip = sound.clip;
 
-            s.source.volume = s.volume;
-            s.source.pitch = s.pitch;
+            sound.source.volume = sound.volume;
+            sound.source.pitch = sound.pitch;
         }
     }
 
-    public void Play(string name) 
+    public void Play(SoundType soundType) 
     {
-        Sound s = Array.Find(sounds , sound => sound.name == name);
+        var s = Array.Find(sounds , sound => sound.type == soundType);
+        print(s.type);
         s.source.Play();
     }
+}
+
+public enum SoundType
+{
+    DefaultBoxBreak,
+    GlassBoxBreak,
+    GameOver
 }
 
