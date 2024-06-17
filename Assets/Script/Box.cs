@@ -14,6 +14,9 @@ public class Box : MonoBehaviour
 
             // Apply force in the direction of impact
             rb.AddForce(direction.normalized * force, ForceMode.Impulse);//boxlara addForce ekleniyor
+
+            //sound
+            FindObjectOfType<AudioManager>().Play("BlockBreak");
         }
     }
 }

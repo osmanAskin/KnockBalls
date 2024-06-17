@@ -38,6 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -696,6 +697,7 @@ Transform:
   - {fileID: 1638378379}
   - {fileID: 2132883857}
   - {fileID: 1457747763}
+  - {fileID: 1386475548}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &180532363
@@ -3792,7 +3794,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 9, y: 293}
+  m_AnchoredPosition: {x: -21.7, y: 322}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &893265972
@@ -3817,8 +3819,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 0
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8fce51aee55542d4bb6b7ca64f123445, type: 2}
+  m_sharedMaterial: {fileID: -6489339620043848669, guid: 8fce51aee55542d4bb6b7ca64f123445, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -3842,8 +3844,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 90
+  m_fontSizeBase: 90
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -3878,7 +3880,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 0, y: 0, z: -85.59003, w: -75.92354}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -4119,8 +4121,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f62b97d749a22b4ba7956fcf09d2d91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreText: {fileID: 495912799}
-  _score: 0
   LayoutAnimator: {fileID: 7078908500145761565}
   progressBarObject: {fileID: 1668691930}
   bulletObject: {fileID: 2014773767}
@@ -4128,6 +4128,7 @@ MonoBehaviour:
   mainMenuObject: {fileID: 210588423}
   winObject: {fileID: 295601107}
   loseObject: {fileID: 1054370354}
+  highScoreText: {fileID: 0}
 --- !u!1 &1001770672
 GameObject:
   m_ObjectHideFlags: 0
@@ -5468,6 +5469,55 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1352275358}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1386475547
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1386475548}
+  - component: {fileID: 1386475549}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1386475548
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1386475547}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 147105292}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1386475549
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1386475547}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8bd7e1ba82377aa4cbc3533a9ac43698, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  name: BlockBreak
+  clip: {fileID: 8300000, guid: 35fcc4cfff6b4ec4b87ea50ad0ff2e10, type: 3}
+  volume: 1
+  pitch: 1.85
+  source: {fileID: 0}
 --- !u!1 &1403420767
 GameObject:
   m_ObjectHideFlags: 0
@@ -6838,6 +6888,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab: {fileID: 5189371062357702500, guid: 3ce53749ef367412db12a50bb5157cfc, type: 3}
   speed: 60
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 0
   clickLayerMask:
     serializedVersion: 2
     m_Bits: 72
@@ -8995,7 +9048,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scoreText: {fileID: 495912799}
+  highScoreText: {fileID: 893265972}
   _score: 0
+  _highScore: 0
 --- !u!1 &2132883853
 GameObject:
   m_ObjectHideFlags: 0

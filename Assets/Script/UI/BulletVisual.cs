@@ -16,6 +16,6 @@ public class BulletVisual : MonoBehaviour//mantýðý scoreVisual ile ayni
 
     private void UpdateBulletCount(int count)
     {
-        bulletText.text = "X " + count; 
+        bulletText.text = "X " + count;
     }
 }

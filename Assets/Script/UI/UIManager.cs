@@ -1,24 +1,24 @@
 using System;
+using TMPro;
 using UnityEngine;
 
 public class UIManager : MonoBehaviour
 {
-    //first scene settings 
     [SerializeField] private Animator LayoutAnimator;
     
-    //mainmenu canvas
     [SerializeField] private GameObject progressBarObject;
     [SerializeField] private GameObject bulletObject;
     [SerializeField] private GameObject restartMenuObject;
     [SerializeField] private GameObject mainMenuObject;
     [SerializeField] private GameObject winObject;
     [SerializeField] private GameObject loseObject;
+    [SerializeField] private TextMeshProUGUI highScoreText;
     private BallShooter ballShooter;
     private Platform platform;
 
     private void Start()
     {
-        ballShooter = FindObjectOfType<BallShooter>();
+        ballShooter = FindObjectOfType<BallShooter>();//fail onbulletfinishe subscribe oluyor
         ballShooter.OnBulletFinish += ActivateFail;
         
         platform = FindObjectOfType<Platform>();
@@ -53,6 +53,8 @@ public class UIManager : MonoBehaviour
     {
         loseObject.SetActive(true);
     }
+
+    
 }
 
 

@@ -1,6 +1,7 @@
 using DG.Tweening;
 using System;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -8,7 +9,7 @@ using UnityEngine.SceneManagement;
 public class Platform : MonoBehaviour
 {
     [SerializeField] private BoxCollider collider;//platformun coll
-    [SerializeField] private LayerMask layerMask; //platformun sayaca�i nesnelerin katmanlarini belirler(sadece box)
+    [SerializeField] private LayerMask layerMask; //platformun sayaca�i nesnelerin katmanlarini belirler(sadece box)/
 
     private int totalBoxCount;//platformun �zerindeki ba�lang��taki kutu sayisi
     private int currentBoxCount;//platformun �zerinde olan �uan ki kutu sayisi 
@@ -17,26 +18,25 @@ public class Platform : MonoBehaviour
 
     private void Start()
     {
-        totalBoxCount = CalculateBoxCountOnPlatform(); //platformdaki hesaplanm�� kutu sayisini ba�lang��taki de�ere atar ki ba�lang��ta ka� kutu oldugu bilinebilsin
-        InvokeRepeating(nameof(CheckGameEnd), 0, 2f);//method 2 saniyede bir tekrar tekrar �al���r
+        totalBoxCount = CalculateBoxCountOnPlatform();//oyun basladiginda kac kutu var
+        InvokeRepeating(nameof(CheckGameEnd), 0, 2f);//2saniyede bir kac kutu olduguna bakar 
     }
-    
-    
-    
-    public void CheckGameEnd()//anlamadim:
+
+    public void CheckGameEnd() 
     {
         var numberOfBoxOnPlatform = CalculateBoxCountOnPlatform();
 
-        if (currentBoxCount != numberOfBoxOnPlatform)//hesaplanan sayi �nceki kutu sayisi ile farkliysa �uanki kutu sayisini g�nceller
+        if (currentBoxCount != numberOfBoxOnPlatform) 
         {
-            currentBoxCount = numberOfBoxOnPlatform;
-            OnHittedBoxCountChange?.Invoke(totalBoxCount - numberOfBoxOnPlatform);
+            currentBoxCount = numberOfBoxOnPlatform;//current ile platformdaki sayi esit degilse sayilari esitler
+            OnHittedBoxCountChange?.Invoke(totalBoxCount - numberOfBoxOnPlatform);//degisiklikleri hesaplar ve OnHittedBoxCountChange atar
         }
-        
-        if (numberOfBoxOnPlatform == 0)//platformun �zerinde hi� kutu kalmadiysa bu ko�ullu d�ng�ye girer
+
+        if (numberOfBoxOnPlatform == 0) 
         {
-            OnBoxCountFinish?.Invoke();
-            Invoke(nameof(NextLevelTransition), 2f);
+            OnBoxCountFinish?.Invoke();//platformda kutu kalmadiysa OnBoxCountFinish actionunu cagir(win ekrani)
+            Invoke(nameof(NextLevelTransition),2f); 
+                
         }
     }
 
@@ -45,10 +45,12 @@ public class Platform : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
-    private int CalculateBoxCountOnPlatform()//platformun �arp��ma alan� boyutlar�n� ve konumunu hesaplayarak kutu say�s� belirlenir
+    private int CalculateBoxCountOnPlatform()//objeler platformda mi hesaplayan mekanizma 
     {
         var colliderPosition = transform.position + collider.center;
-        var numberOfBoxOnPlatform = Physics.OverlapBox(colliderPosition,  collider.size, Quaternion.identity, layerMask).Length;
+        var numberOfBoxOnPlatform = Physics.OverlapBox(colliderPosition, collider.size, Quaternion.identity, layerMask).Length;
         return numberOfBoxOnPlatform;
     }
+
+
 }
