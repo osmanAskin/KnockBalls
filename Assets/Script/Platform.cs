@@ -1,4 +1,5 @@
 using DG.Tweening;
+using JetBrains.Annotations;
 using System;
 using TMPro;
 using Unity.VisualScripting;
@@ -16,8 +17,19 @@ public class Platform : MonoBehaviour
     public Action<int> OnHittedBoxCountChange;//kalan kutu sayisi de�i�ti�inde tetiklenen event
     public Action OnBoxCountFinish;
 
+    BallShooter ballShooter;
+    Platform platform;
+
     private void Start()
     {
+        ballShooter = FindObjectOfType<BallShooter>();
+        ballShooter.OnBulletFinish += CheckFail;
+
+        platform = FindObjectOfType<Platform>();
+        platform.OnBoxCountFinish += CheckFail;
+
+
+
         totalBoxCount = CalculateBoxCountOnPlatform();//oyun basladiginda kac kutu var
         InvokeRepeating(nameof(CheckGameEnd), 0, 2f);//2saniyede bir kac kutu olduguna bakar 
     }
@@ -52,5 +64,24 @@ public class Platform : MonoBehaviour
         return numberOfBoxOnPlatform;
     }
 
+    public void CheckFail() 
+    {
+        int fallenBox = totalBoxCount - CalculateBoxCountOnPlatform();
+
+
+        if (fallenBox == 0) 
+        {
+            Debug.Log("Win Ekrani");
+            //platform.OnBoxCountFinish?.Invoke();
+        }
+
+        else if(fallenBox != 0)
+        {
+            Debug.Log("Fail Ekrani");
+            //ballShooter.OnBulletFinish?.Invoke();
+        }
+        //var değiskene = baslangıctaki box sayisi - dusen box sayisi
+        //if(var değisken == 0) yap
+    }
 
 }

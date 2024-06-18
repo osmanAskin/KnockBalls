@@ -1,6 +1,7 @@
 using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject winObject;
     [SerializeField] private GameObject loseObject;
     [SerializeField] private TextMeshProUGUI highScoreText;
+    [SerializeField] private Image barFillImage;
     private BallShooter ballShooter;
     private Platform platform;
 
@@ -21,8 +23,10 @@ public class UIManager : MonoBehaviour
         ballShooter = FindObjectOfType<BallShooter>();//fail onbulletfinishe subscribe oluyor
         ballShooter.OnBulletFinish += ActivateFail;
         
+
         platform = FindObjectOfType<Platform>();
         platform.OnBoxCountFinish += ActivateWin;
+        platform.OnBoxCountFinish += FillAmount;
     }
 
     public void LayoutSettingsOpen()
@@ -52,6 +56,11 @@ public class UIManager : MonoBehaviour
     private void ActivateFail() 
     {
         loseObject.SetActive(true);
+    }
+
+    private void FillAmount() 
+    {
+        barFillImage.fillAmount += .4f;
     }
 
     

@@ -16,42 +16,16 @@ public class BallShooter : MonoBehaviour
     public Action<int> OnBulletCountChange;//mermi sayısındaki değişiklikleri bildiren action
     public Action OnBulletFinish;//fail ekrani
 
+    private AudioManager audioManager;
+    private CannonEffects effects;
+
     private void Start()
     {
+        audioManager = FindObjectOfType<AudioManager>();
+
         OnBulletCountChange?.Invoke(bulletCount);
         SpawnNewBall();
     }
-
-    /*
-    public void OnPointerUp(BaseEventData eventData)//ekrana gelen inputlara bakar
-    {
-        if (bulletCount <= 0)
-        {
-            OnBulletFinish?.Invoke();//fail ekranini verir
-            return;//mermi sayisi s�f�rdan k�c�k veya az ise bos return d�nd�r�r
-
-        }
-    
-            
-        
-        if (currentBallRb == null) return; //at�lmaya hazir top yoksa da bos return d�nd�r�r yani foknsiyondan c�kar
-        
-        PointerEventData pointerEventData = eventData as PointerEventData;
-        Ray ray = Camera.main.ScreenPointToRay(pointerEventData.position);
-        RaycastHit hit;
-        if (Physics.SphereCast(ray, 0.15f, out hit, 100f, clickLayerMask, QueryTriggerInteraction.Ignore))//k�saca ���n g�nderiyor ve �arpan yerin konumunu aliyor
-        {
-            ShootTarget(hit.point);
-            
-            bulletCount--;
-            OnBulletCountChange?.Invoke(bulletCount);   
-            if (bulletCount == 0)
-            {
-                return;
-            }
-        }
-    }
-    */
 
     public void OnPointerUp(BaseEventData eventData) 
     {
@@ -78,10 +52,15 @@ public class BallShooter : MonoBehaviour
             OnBulletCountChange?.Invoke(bulletCount);
             if (bulletCount == 0)
             {
+                //Invoke(nameof(CheckFail), 2f);
+                Invoke(nameof(Platform.CheckFail), 2f);
                 return;
-            }
-        }   
 
+            }
+        }
+
+        audioManager.Play(SoundType.CannonShoot);
+       // effects.CannonShootAnimation();
 
     }
 
@@ -93,7 +72,7 @@ public class BallShooter : MonoBehaviour
         angle *= Mathf.Rad2Deg;
         SetVelocity(currentBallRb, Quaternion.AngleAxis(angle, -transform.right) * fromTo2D.normalized * speed);
         currentBallRb = null;
-        Invoke(nameof(SpawnNewBall), 1f);
+        Invoke(nameof(SpawnNewBall), .1f);
     }
 
     // Taken from: https://github.com/IronWarrior/ProjectileShooting

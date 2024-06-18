@@ -29,6 +29,7 @@ public enum SoundType
 {
     DefaultBoxBreak,
     GlassBoxBreak,
-    GameOver
+    GameOver,
+    CannonShoot
 }
 
