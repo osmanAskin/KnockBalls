@@ -20,7 +20,6 @@ public class AudioManager : MonoBehaviour
     public void Play(SoundType soundType) 
     {
         var s = Array.Find(sounds , sound => sound.type == soundType);
-        print(s.type);
         s.source.Play();
     }
 }

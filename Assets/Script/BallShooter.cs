@@ -50,13 +50,6 @@ public class BallShooter : MonoBehaviour
 
             bulletCount--;
             OnBulletCountChange?.Invoke(bulletCount);
-            if (bulletCount == 0)
-            {
-                //Invoke(nameof(CheckFail), 2f);
-                Invoke(nameof(Platform.CheckFail), 2f);
-                return;
-
-            }
         }
 
         audioManager.Play(SoundType.CannonShoot);
