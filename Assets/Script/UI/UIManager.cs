@@ -1,5 +1,6 @@
 using DG.Tweening;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -18,36 +19,46 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Image barFillImage;
     private BallShooter ballShooter;
     private Platform platform;
+    private ExplodeCube explodeCube;
 
     private void Start()
     {
-        ballShooter = FindObjectOfType<BallShooter>();//fail onbulletfinishe subscribe oluyor
-        ballShooter.OnBulletFinish += CheckFailOrWinScreen;
-        
+        explodeCube = FindObjectOfType<ExplodeCube>();
+
+
+        ballShooter = FindObjectOfType<BallShooter>();
+        ballShooter.OnBulletFinish += CheckFailOrWinScreen;//fail onbulletfinishe subscribe oluyor
+
 
         platform = FindObjectOfType<Platform>();
         platform.OnBoxCountFinish += ActivateWin;
         platform.OnBoxCountFinish += FillAmount;
     }
 
-    private void CheckFailOrWinScreen()
+
+    private void CheckFailOrWinScreen() 
     {
         var boxCountOnPlatform = platform.CalculateBoxCountOnPlatform();
-        if(boxCountOnPlatform == 0)
+        if(boxCountOnPlatform == 0) 
         {
             ActivateWin();
         }
-        else
+
+        else  
         {
             DOVirtual.DelayedCall(1f, () =>
             {
-                if(platform.CalculateBoxCountOnPlatform() > 0)
+                if (platform.CalculateBoxCountOnPlatform() > 0)//1 saniye sonra caðrildiði icin methodun kendisini referans olarak aliyor cunki 1 saniyede platformun üzerindeki cublar deðisebilir 
                 {
                     ActivateFail();
                 }
             });
+            
         }
+
+
     }
+
 
     public void LayoutSettingsOpen()
     {
@@ -77,6 +88,7 @@ public class UIManager : MonoBehaviour
     private void ActivateFail() 
     {
         loseObject.SetActive(true);
+        CameraShake.Shake(1f, 1f);
         DOVirtual.DelayedCall(2f, RestartLevel);
     }
 
@@ -88,11 +100,13 @@ public class UIManager : MonoBehaviour
     private void NextLevel()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        Debug.Log("next");//3 kere calisiyor 
     }
     
     private void RestartLevel()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        Debug.Log("restart");//restartta ayni sekilde
     }
 }
 

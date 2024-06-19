@@ -53,6 +53,7 @@ public class BallShooter : MonoBehaviour
         }
 
         audioManager.Play(SoundType.CannonShoot);
+        CameraShake.Shake(.3f, .8f);
        // effects.CannonShootAnimation();
 
     }
