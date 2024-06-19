@@ -48,7 +48,7 @@ public class UIManager : MonoBehaviour
         {
             DOVirtual.DelayedCall(1f, () =>
             {
-                if (platform.CalculateBoxCountOnPlatform() > 0)//1 saniye sonra caðrildiði icin methodun kendisini referans olarak aliyor cunki 1 saniyede platformun üzerindeki cublar deðisebilir 
+                if (platform.CalculateBoxCountOnPlatform() > 0)//1 saniye sonra caï¿½rildiï¿½i icin methodun kendisini referans olarak aliyor cunki 1 saniyede platformun ï¿½zerindeki cublar deï¿½isebilir 
                 {
                     ActivateFail();
                 }
@@ -88,7 +88,6 @@ public class UIManager : MonoBehaviour
     private void ActivateFail() 
     {
         loseObject.SetActive(true);
-        CameraShake.Shake(1f, 1f);
         DOVirtual.DelayedCall(2f, RestartLevel);
     }
 
