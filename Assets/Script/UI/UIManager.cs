@@ -18,6 +18,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Image barFillImage;
     private BallShooter ballShooter;
     private Platform platform;
+    private bool sceneChanged;
 
     private void Start()
     {
@@ -27,8 +28,7 @@ public class UIManager : MonoBehaviour
         platform.OnBoxCountFinish += ActivateWin;
         platform.OnBoxCountFinish += FillAmount;
     }
-
-
+    
     private void CheckFailOrWinScreen() 
     {
         var boxCountOnPlatform = platform.CalculateBoxCountOnPlatform();
@@ -45,7 +45,6 @@ public class UIManager : MonoBehaviour
                     ActivateFail();
                 }
             });
-            
         }
     }
 
@@ -70,12 +69,18 @@ public class UIManager : MonoBehaviour
 
     private void ActivateWin() 
     {
+        if (sceneChanged) return;
+        sceneChanged = true;
+        
         winObject.SetActive(true);
         DOVirtual.DelayedCall(2f, NextLevel);
     }
 
     private void ActivateFail() 
     {
+        if (sceneChanged) return;
+        sceneChanged = true;
+        
         loseObject.SetActive(true);
         DOVirtual.DelayedCall(2f, RestartLevel);
     }
@@ -88,13 +93,13 @@ public class UIManager : MonoBehaviour
     private void NextLevel()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        Debug.Log("next");//3 kere calisiyor 
+        Debug.Log("next"); 
     }
     
     private void RestartLevel()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        Debug.Log("restart");//restartta ayni sekilde
+        Debug.Log("restart");
     }
 }
 
