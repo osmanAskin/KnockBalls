@@ -2,18 +2,23 @@ using UnityEngine;
 
 public class CannonEffects : MonoBehaviour
 {
-    [SerializeField] private Animator animator;
+    [SerializeField] private Animator mAnimator;
 
-    public void CannonShootAnimation()
+    private void Start()
     {
-        if (animator != null)
+        mAnimator = GetComponent<Animator>();
+    }
+
+    public void AnimatorActivate()
+    {
+        if (mAnimator != null)
         {
-            animator.Play("Cannon");
-            Debug.Log("calisti");
+            mAnimator.SetTrigger("TrOpen");
         }
+
         else
         {
-            Debug.LogError("Animator bileþeni atanmadý!");
+            Debug.LogError("Animator not assigned!");
         }
     }
 }

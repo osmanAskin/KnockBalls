@@ -13,14 +13,16 @@ public class BallShooter : MonoBehaviour
 
     public int bulletCount;
     private Ball currentBall;
-    public Action<int> OnBulletCountChange;//mermi sayısındaki değişiklikleri bildiren action
-    public Action OnBulletFinish;//fail ekrani
+    public Action<int> OnBulletCountChange;
+    public Action OnBulletFinish;
 
     private AudioManager audioManager;
-    private CannonEffects effects;
+    CannonEffects cannonEffects;
 
     private void Start()
     {
+
+        cannonEffects = FindObjectOfType<CannonEffects>();
         audioManager = FindObjectOfType<AudioManager>();
 
         OnBulletCountChange?.Invoke(bulletCount);
@@ -32,14 +34,14 @@ public class BallShooter : MonoBehaviour
         if(bulletCount <= 0) 
         {
             OnBulletFinish?.Invoke();
-            return;//mermi 0 veya kucukse fail ekrani gelir ve bos return döndürülür
+            return;
         }
 
         PointerEventData pointerEventData = eventData as PointerEventData;
         Ray ray = Camera.main.ScreenPointToRay(pointerEventData.position);
         RaycastHit hit;
 
-        if (Physics.SphereCast(ray, 0.15f, out hit, 100f, clickLayerMask, QueryTriggerInteraction.Ignore))//isin gonderiyor carpan yerin positionunu aliyor
+        if (Physics.SphereCast(ray, 0.15f, out hit, 100f, clickLayerMask, QueryTriggerInteraction.Ignore))
         {
             ShootTarget(hit.point);
 
@@ -49,6 +51,17 @@ public class BallShooter : MonoBehaviour
 
         audioManager.Play(SoundType.CannonShoot);
         CameraUtils.Shake();
+
+        if (cannonEffects != null)
+        {
+            cannonEffects.AnimatorActivate();
+        }
+
+        if (currentBall != null)
+        {
+            currentBall.BallScaleIncrease();
+        }
+
 
     }
 

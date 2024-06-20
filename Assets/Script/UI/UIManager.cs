@@ -93,7 +93,7 @@ public class UIManager : MonoBehaviour
 
     private void FillAmount() 
     {
-        barFillImage.fillAmount += .4f;
+        barFillImage.fillAmount += 2;
     }
     
     private void NextLevel()
