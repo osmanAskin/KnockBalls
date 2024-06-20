@@ -23,7 +23,7 @@ public class UIManager : MonoBehaviour
     private void Start()
     {
         ballShooter = FindObjectOfType<BallShooter>();
-        ballShooter.OnBulletFinish += CheckFailOrWinScreen;//fail onbulletfinishe subscribe oluyor
+        ballShooter.OnBulletFinish += CheckFailOrWinScreen;
         platform = FindObjectOfType<Platform>();
         platform.OnBoxCountFinish += ActivateWin;
         platform.OnBoxCountFinish += FillAmount;
@@ -40,7 +40,7 @@ public class UIManager : MonoBehaviour
         {
             DOVirtual.DelayedCall(1f, () =>
             {
-                if (platform.CalculateBoxCountOnPlatform() > 0)//1 saniye sonra ca�rildi�i icin methodun kendisini referans olarak aliyor cunki 1 saniyede platformun �zerindeki cublar de�isebilir 
+                if (platform.CalculateBoxCountOnPlatform() > 0)
                 {
                     ActivateFail();
                 }
@@ -95,7 +95,7 @@ public class UIManager : MonoBehaviour
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         int nextSceneIndex = currentSceneIndex + 1;
 
-        // Check if there's a scene at the next index
+
         if (nextSceneIndex < SceneManager.sceneCountInBuildSettings)
         {
             SceneManager.LoadScene(nextSceneIndex);
@@ -103,7 +103,7 @@ public class UIManager : MonoBehaviour
         }
         else
         {
-            SceneManager.LoadScene(0); // Load first scene (index 0)
+            SceneManager.LoadScene(0); 
             Debug.Log("Starting from the beginning.");
         }
     }

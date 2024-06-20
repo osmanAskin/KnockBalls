@@ -1,7 +1,7 @@
 using TMPro;
 using UnityEngine;
 
-public class BulletVisual : MonoBehaviour//mantýðý scoreVisual ile ayni
+public class BulletVisual : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI bulletText;
 

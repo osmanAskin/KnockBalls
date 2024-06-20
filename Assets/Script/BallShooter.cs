@@ -88,13 +88,13 @@ public class BallShooter : MonoBehaviour
         return true;
     }
 
-    private void SetVelocity(Ball ball, Vector3 velocity)//topun rb bilesenine yeni bir hiz degeri atiyor
+    private void SetVelocity(Ball ball, Vector3 velocity)
     {
         ball.OnFire();
         ball.rb.AddForce(velocity, ForceMode.VelocityChange);
     }
 
-    public void SpawnNewBall()//leanpool sistemi kullanarak yeni bir top olu�turur ve onu atilmaya hazir hale getirir
+    public void SpawnNewBall()
     {
         currentBall = LeanPool.Spawn(prefab,transform.position,Quaternion.identity);
         currentBall.OnSpawn();

@@ -13,6 +13,6 @@ public class Sound
     [Range(.1f,3f)]
     public float pitch;
 
-    [HideInInspector]//unity editorunde gizli kalmali ama scrip icinde kullanilmali
+    [HideInInspector]
     public AudioSource source;
 }
