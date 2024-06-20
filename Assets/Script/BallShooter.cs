@@ -15,6 +15,7 @@ public class BallShooter : MonoBehaviour
     private Ball currentBall;
     public Action<int> OnBulletCountChange;
     public Action OnBulletFinish;
+    private bool onBulletFinishChecked;
 
     private AudioManager audioManager;
 
@@ -26,10 +27,13 @@ public class BallShooter : MonoBehaviour
         SpawnNewBall();
     }
 
-    public void OnPointerUp(BaseEventData eventData) 
+    public void OnPointerUp(BaseEventData eventData)
     {
-        if(bulletCount <= 0) 
+        if (onBulletFinishChecked) return;
+        
+        if(bulletCount <= 0)
         {
+            onBulletFinishChecked = true;
             OnBulletFinish?.Invoke();
             return;
         }

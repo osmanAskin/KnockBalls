@@ -1,6 +1,5 @@
 using DG.Tweening;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -19,17 +18,11 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Image barFillImage;
     private BallShooter ballShooter;
     private Platform platform;
-    private ExplodeCube explodeCube;
 
     private void Start()
     {
-        explodeCube = FindObjectOfType<ExplodeCube>();
-
-
         ballShooter = FindObjectOfType<BallShooter>();
         ballShooter.OnBulletFinish += CheckFailOrWinScreen;//fail onbulletfinishe subscribe oluyor
-
-
         platform = FindObjectOfType<Platform>();
         platform.OnBoxCountFinish += ActivateWin;
         platform.OnBoxCountFinish += FillAmount;
@@ -43,7 +36,6 @@ public class UIManager : MonoBehaviour
         {
             ActivateWin();
         }
-
         else  
         {
             DOVirtual.DelayedCall(1f, () =>
@@ -55,10 +47,7 @@ public class UIManager : MonoBehaviour
             });
             
         }
-
-
     }
-
 
     public void LayoutSettingsOpen()
     {
