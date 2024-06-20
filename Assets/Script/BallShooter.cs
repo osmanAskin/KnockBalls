@@ -3,9 +3,9 @@ using Lean.Pool;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-//TODO: ui kisimlarini burdan kaldir, GameManager'dan oyun bitti fonksiyonunu cagir ve oranin icinde oyunu bitir ui degisiklerini de 
 public class BallShooter : MonoBehaviour
 {
+    [SerializeField] private CannonShootScenario cannonShootScenario;
     [SerializeField] private Ball prefab;
     [SerializeField] private float speed;
     [SerializeField] private LayerMask layerMask;
@@ -17,12 +17,9 @@ public class BallShooter : MonoBehaviour
     public Action OnBulletFinish;
 
     private AudioManager audioManager;
-    CannonEffects cannonEffects;
 
     private void Start()
     {
-
-        cannonEffects = FindObjectOfType<CannonEffects>();
         audioManager = FindObjectOfType<AudioManager>();
 
         OnBulletCountChange?.Invoke(bulletCount);
@@ -52,17 +49,7 @@ public class BallShooter : MonoBehaviour
         audioManager.Play(SoundType.CannonShoot);
         CameraUtils.Shake();
 
-        if (cannonEffects != null)
-        {
-            cannonEffects.AnimatorActivate();
-        }
-
-        if (currentBall != null)
-        {
-            currentBall.BallScaleIncrease();
-        }
-
-
+        cannonShootScenario.Execute();
     }
 
     public void ShootTarget(Vector3 raycastHitPosition)

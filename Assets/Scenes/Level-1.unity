@@ -38,7 +38,6 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -484,8 +483,6 @@ Transform:
   m_Children:
   - {fileID: 1747415099}
   - {fileID: 52996470}
-  - {fileID: 3985224358953264557}
-  - {fileID: 2825742081315120647}
   - {fileID: 2132883857}
   - {fileID: 1386475548}
   - {fileID: 1638378379}
@@ -3661,10 +3658,12 @@ Transform:
   m_GameObject: {fileID: 1638378378}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.63, z: -7.57}
+  m_LocalPosition: {x: 0, y: 1.93, z: -12.61}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 3985224358953264557}
+  - {fileID: 2825742081315120647}
   m_Father: {fileID: 147105292}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1638378380
@@ -3679,6 +3678,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dcd20f49eb838461895aea4e15099c7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cannonShootScenario: {fileID: 3985224358953264559}
   prefab: {fileID: 5189371062357702500, guid: 3ce53749ef367412db12a50bb5157cfc, type: 3}
   speed: 75
   layerMask:
@@ -5648,14 +5648,14 @@ Transform:
   m_GameObject: {fileID: 3205680984848170173}
   serializedVersion: 2
   m_LocalRotation: {x: 0.0034443883, y: 0.9658403, z: -0.012854613, w: 0.2587962}
-  m_LocalPosition: {x: -2.6300008, y: -5.8199997, z: 3.180001}
-  m_LocalScale: {x: 1.8, y: 1.7999996, z: 1.8000001}
+  m_LocalPosition: {x: -2.6300008, y: -7.7499995, z: 15.790001}
+  m_LocalScale: {x: 1.8, y: 1.7999995, z: 1.8000002}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6843303708375220975}
   - {fileID: 8382301528028386889}
   - {fileID: 289347691109566458}
-  m_Father: {fileID: 147105292}
+  m_Father: {fileID: 1638378379}
   m_LocalEulerAnglesHint: {x: 1.525, y: 150, z: 0}
 --- !u!23 &2878698734315429351
 MeshRenderer:
@@ -6421,14 +6421,14 @@ Transform:
   m_GameObject: {fileID: 3985224358953168399}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0.59176743, z: -0, w: 0.80610883}
-  m_LocalPosition: {x: 0.05, y: -17.66, z: -1.47}
+  m_LocalPosition: {x: 0.05, y: -19.59, z: 11.139999}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3985224358953284579}
   - {fileID: 3985224358953320557}
   - {fileID: 3985224358953334835}
-  m_Father: {fileID: 147105292}
+  m_Father: {fileID: 1638378379}
   m_LocalEulerAnglesHint: {x: 0, y: -72.565, z: 0}
 --- !u!95 &3985224358953264558
 Animator:

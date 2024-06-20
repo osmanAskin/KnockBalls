@@ -1,9 +1,13 @@
+using System;
 using DG.Tweening;
 using UnityEngine;
-using static Unity.VisualScripting.Metadata;
 
 public class Ball : MonoBehaviour
 {
+    [SerializeField] private float currentScale;
+    [SerializeField] private float fireScale;
+    [SerializeField] private float scaleDownDuration;
+    
     public Rigidbody rb;
     public MeshRenderer meshRenderer;
 
@@ -17,20 +21,6 @@ public class Ball : MonoBehaviour
     {
         rb.isKinematic = false;
         meshRenderer.enabled = true;
+        transform.DOScale(currentScale, scaleDownDuration).From(fireScale);
     }
-
-    public void BallScaleIncrease()
-    {
-        if (transform != null)
-        {
-            rb.transform.DOScale(1f, 10f).SetLoops(2,LoopType.Yoyo);
-        }
-  
-
-
-
-    }
-
-    }
-
-
+}

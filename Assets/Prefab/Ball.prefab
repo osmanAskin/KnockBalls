@@ -160,6 +160,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68184afb421ac0b49bbf58700d3011fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentScale: 1.5
+  fireScale: 2.5
+  scaleDownDuration: 0.35
   rb: {fileID: 3849594830737382408}
   meshRenderer: {fileID: 5494158277092507145}
 --- !u!96 &2803218625316936933
@@ -205,7 +208,7 @@ TrailRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Time: 1
-  m_PreviewTimeScale: 0
+  m_PreviewTimeScale: 1
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 1

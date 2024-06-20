@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class CannonEffects : MonoBehaviour
+public class CannonShootScenario : MonoBehaviour
 {
     [SerializeField] private Animator mAnimator;
 
@@ -9,13 +9,12 @@ public class CannonEffects : MonoBehaviour
         mAnimator = GetComponent<Animator>();
     }
 
-    public void AnimatorActivate()
+    public void Execute()
     {
         if (mAnimator != null)
         {
             mAnimator.SetTrigger("TrOpen");
         }
-
         else
         {
             Debug.LogError("Animator not assigned!");
