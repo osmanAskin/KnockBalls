@@ -92,10 +92,21 @@ public class UIManager : MonoBehaviour
     
     private void NextLevel()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        Debug.Log("next"); 
+        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        int nextSceneIndex = currentSceneIndex + 1;
+
+        // Check if there's a scene at the next index
+        if (nextSceneIndex < SceneManager.sceneCountInBuildSettings)
+        {
+            SceneManager.LoadScene(nextSceneIndex);
+            Debug.Log("Loading next scene: " + nextSceneIndex);
+        }
+        else
+        {
+            SceneManager.LoadScene(0); // Load first scene (index 0)
+            Debug.Log("Starting from the beginning.");
+        }
     }
-    
     private void RestartLevel()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
